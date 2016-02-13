@@ -19,12 +19,14 @@ public class Instruction_Fetch_Decode
 	{
 		try
 		{
+			BufferedWriter output=new BufferedWriter(new FileWriter("HW2Disassembly.txt"));
 			Load("HW2MachineCode.txt");
 			for(int i=0;i<operations.size();i++)
 			{
-				System.out.println(decode(fetch())); //Pull machine code instruction from list, then translate into MIPS language
-				program_counter+=4;
+				output.write(decode(fetch())+"\n"); //Pull machine code instruction from list, translate, then write
+				program_counter+=4; //Step to next instruction
 			}
+			output.close();
 		}
 		catch(IOException | InvalidOpException ex)
 		{
